@@ -72,15 +72,15 @@ export function Home() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-14 overflow-hidden bg-[url(/image5.png)] bg-cover bg-center">
+      <section className="relative min-h-screen flex items-center pt-14 overflow-hidden bg-[url(/hero-mobile.png)] md:bg-[url(/image5.png)] bg-cover bg-center">
         {/* Main Hero Image */}
 
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-32">
-          <div className="lg:col-span-5 py-16 ">
+          <div className="lg:col-span-5 py-16 flex flex-col items-center md:items-start text-center md:text-left">
             <motion.h1
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-slate-900 text-[32px] md:text-[50px] lg:text-[60px] leading-[1.1] md:leading-[1.05] mb-8 md:mb-12 font-bold tracking-tight text-white"
+              className="text-slate-900 text-[42px] md:text-[70px] lg:text-[60px] leading-[1.05] mb-8 md:mb-12 font-bold tracking-tight text-white"
             >
               Compassionate <br className="hidden md:block" />care, exceptional<br className="hidden md:block" />results.
             </motion.h1>
@@ -89,9 +89,9 @@ export function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex items-start gap-8 mb-16"
+              className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-16"
             >
-              <div className="flex flex-col gap-1 mt-2 shrink-0">
+              <div className="flex flex-col items-center md:items-start gap-1 shrink-0">
                 <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-white">LMA Hospital</span>
                 <div className="w-10 h-[2px] bg-primary"></div>
               </div>
@@ -106,7 +106,7 @@ export function Home() {
             initial={{ opacity: 0, scale: 0.8, x: 100 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="absolute top-3 -right-14 bg-white/60 backdrop-blur-2xl p-2 pr-6 rounded-full flex items-center gap-4 shadow-2xl border border-white/50"
+            className="hidden md:flex absolute top-3 -right-14 bg-white/60 backdrop-blur-2xl p-2 pr-6 rounded-full items-center gap-4 shadow-2xl border border-white/50"
           >
             <div className="flex -space-x-3 ml-1">
               {[1, 2, 3].map(i => (
@@ -131,22 +131,22 @@ export function Home() {
 
 
           {/* Expanded Bottom Stats Bar */}
-          <div className="absolute lg:-bottom-5 lg:right-0 lg:translate-x-1/4 w-full lg:w-auto px-6 lg:px-0 mt-12 lg:mt-0">
+          <div className="hidden lg:block absolute -bottom-[20px] -right-[9rem] max-w-[80%]">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/60 md:bg-white/50 backdrop-blur-2xl rounded-3xl lg:rounded-none lg:rounded-t-[50px] p-6 md:p-10 flex flex-grid grid grid-cols-2 md:flex md:flex-row justify-between gap-6 md:gap-12 border border-white/40 shadow-2xl lg:shadow-[0_-20px_50px_-15px_rgba(0,0,0,0.05)]"
+              className="bg-white/50 backdrop-blur-2xl rounded-tl-[50px] px-16 py-10 flex justify-between gap-16 border-t border-l border-white/40 shadow-[-20px_-20px_50px_-15px_rgba(0,0,0,0.05)]"
             >
               {[
-                { value: '20+', label: 'years of exp.' },
-                { value: '95%', label: 'satisfaction' },
-                { value: '5K+', label: 'patients/yr' },
-                { value: '10+', label: 'staff docs' },
+                { value: '20+', label: 'years of experience' },
+                { value: '95%', label: 'patient satisfaction' },
+                { value: '5,000+', label: 'patients annually' },
+                { value: '10+', label: 'staff doctors' },
               ].map((stat, idx) => (
-                <div key={idx} className="flex flex-col items-center lg:items-start group">
-                  <div className="text-3xl md:text-[52px] font-black text-zinc-900 leading-none mb-1 md:mb-3 tracking-tighter group-hover:text-primary transition-colors duration-500">{stat.value}</div>
-                  <div className="text-slate-500 text-[9px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-center lg:text-left opacity-60">
+                <div key={idx} className="flex flex-col items-start group">
+                  <div className="text-[52px] font-black text-zinc-900 leading-none mb-3 tracking-tighter group-hover:text-primary transition-colors duration-500">{stat.value}</div>
+                  <div className="text-slate-500 text-[11px] font-bold uppercase tracking-[0.2em] opacity-60">
                     {stat.label}
                   </div>
                 </div>
