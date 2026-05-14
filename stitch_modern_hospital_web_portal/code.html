@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediCare Global | Compassionate Care, Exceptional Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#9ccbfa",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-container": "#2c5981",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed": "#cee5ff",
+                        "tertiary-container": "#41d77a",
+                        "outline": "#72787f",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#93c2f0",
+                        "surface-dim": "#d8dadc",
+                        "secondary-fixed-dim": "#a0caf8",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#a5d0fe",
+                        "on-tertiary-fixed": "#00210c",
+                        "secondary": "#35628a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "background": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-primary": "#9ccbfa",
+                        "surface-tint": "#30628b",
+                        "on-tertiary-fixed-variant": "#005227",
+                        "tertiary-fixed-dim": "#4de082",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#194a71",
+                        "outline-variant": "#c1c7cf",
+                        "on-tertiary-container": "#00592a",
+                        "on-surface": "#191c1e",
+                        "primary": "#30628b",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#114a72",
+                        "on-secondary-fixed": "#001d34",
+                        "surface": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#42474e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001d32",
+                        "tertiary-fixed": "#6dfe9c",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-primary-container": "#1a5078",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary": "#006d36"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(247, 249, 251, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .glass-stats-overlay {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .hero-bg-custom {
+            background: linear-gradient(105deg, #2b557b 0%, #467197 40%, #e8f1f8 100%);
+        }
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-white/20">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[32px] fill-1">shield_with_heart</span>
+                MediCare Global
+            </div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Find Doctor</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Blog</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<button class="hidden lg:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md font-bold hover:opacity-90 active:scale-95 transition-all">Book Appointment</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[900px] flex items-center pt-20 overflow-hidden hero-bg-custom">
+<div class="absolute right-0 top-0 w-2/3 h-full overflow-hidden pointer-events-none">
+<img class="w-full h-full object-cover object-left opacity-90 mix-blend-overlay" data-alt="A professional medical setting with doctors and patients, conveying warmth and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2tQxjyqjxYMAC4dUIttsaftai64qZVQprQdvFP-wL6sfe8SZ8diSIXpRiEtd_jaaWWbNxneS4nQ-9UT_8l-oD5kqqwLIi-j1VFQ5NBUZ_R1qT_Kbm5hLf1goUZG6XM-dkEAvx_ytlYiyQBkr4UWGcKEVtN5tBFzDDJ13MTVBsXhpgTPHRgvB0_D8woCuWR9eDOZNKTB0yBDp8TG3l9hORXVxw-WeFTFtM5L0i1731eMacqwLDJxAvGhQqhqXHoLN6h9pzVupC4o9z"/>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-6 py-20">
+<h1 class="font-display-lg text-white text-[56px] lg:text-[72px] leading-[1.1] mb-8 text-shadow-sm">
+                        Compassionate<br/>care, exceptional<br/>results.
+                    </h1>
+<div class="flex items-start gap-6 mb-12">
+<div class="w-12 h-[2px] bg-white mt-3 shrink-0"></div>
+<p class="font-body-lg text-white/90 max-w-md leading-relaxed">
+                            Our team of experienced doctors and healthcare professionals are committed to providing quality care and personalized attention to our patients.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-8 items-center">
+<button class="bg-white text-primary px-10 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl">
+                            Find a Doctor
+                        </button>
+<button class="flex items-center gap-3 text-white font-bold group">
+<span class="material-symbols-outlined p-3 rounded-full border border-white/40 bg-white/10 group-hover:bg-white/20 transition-all" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            See how we work
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-6 relative h-[600px] hidden lg:block">
+<!-- Floating Stat 1 -->
+<div class="absolute top-20 right-0 glass-stats-overlay px-6 py-4 rounded-full flex items-center gap-4 shadow-2xl animate-bounce-slow">
+<div class="flex -space-x-3">
+<img alt="Avatar" class="w-10 h-10 rounded-full border-2 border-white/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv2qdVyCQlcf5xRkMF8wG1somr0ZWre0-O23Y31DjNkUCntw0t_qlWN4TgC4MOsq1e_gNNwR__agmxbn-N9-PC3P0bSV1oQa4csQRZLZds3Qx7Up9gxi23CwKk6h4lYyYrZK1z2Aiowvr3SJf1RopccBu2Ct6XJFBtJFhpzhB4FniJuxOQY09df2Nw7e9B7pkfXPl4XRG9SJ-JKnHs5BU-Vd5yMSDnh338PRYUMM_v8ZWYR4uhGy43HTDt9bqpmRvV_MWF53lxdZyc"/>
+<img alt="Avatar" class="w-10 h-10 rounded-full border-2 border-white/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwen1K8RpxSeF3UrTEo90ROx5ci7lGkali4mEouOy6jISvBhi9Tf2V23FdRagOVjCIomjGyPeXQVYGjYDt7t1hPcXmwEDR5brptGNZLRY8sC_O8L8wlTPMiArjxwy4cM6pGvsJ1dnO9CpfsLPDFMvIJM51LA53yMtVumloDjcnyKRtBjq34RhNbZs8I2a0R5FXdgzEuZUKc4pPa9tbyAw9V51hUKzEQZYZVlV5PG_VQGs_3eKuSXJYJeCplmTR9gUdqhUAnUtPQjfR"/>
+<img alt="Avatar" class="w-10 h-10 rounded-full border-2 border-white/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6kI9AVFbMzBU0uzObRsGH_k89pTEdWRRYkKANAPtfw1x-TryWvqN3VG2VGNnwCZ4-1uHbjpVCWbhmzy1a0hsHY1pBdnHzbiJqXPWZxT_Twfqi8X_owPy75nYpZ7x1KkyMk6HeJEu1asbT7hZz_82W39Cr-EMoN1CblvHr5BN_u55K7Obdgq4iRdTbLscBalYq40TWDXc-8ZWFKX7HQmus26COrqoP5vuNkHSmdul_PqJAKUdVX5o7deOoS1d-O-QYj4lwjxm1_TJf"/>
+</div>
+<div class="text-primary font-bold">
+<div class="text-[18px]">150K+</div>
+<div class="text-[12px] opacity-70">Patient Recoveries</div>
+</div>
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[18px]">check</span>
+</div>
+</div>
+</div>
+<!-- Bottom Glass Stats Bar -->
+<div class="lg:col-span-12 absolute bottom-0 left-0 right-0 px-margin-mobile md:px-margin-desktop">
+<div class="glass-stats-overlay rounded-t-[40px] px-12 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+<div>
+<div class="text-[40px] font-bold text-primary">20+</div>
+<div class="text-on-surface-variant text-[14px]">years of experience</div>
+</div>
+<div>
+<div class="text-[40px] font-bold text-primary">95%</div>
+<div class="text-on-surface-variant text-[14px]">patient satisfaction rating</div>
+</div>
+<div>
+<div class="text-[40px] font-bold text-primary">5,000+</div>
+<div class="text-on-surface-variant text-[14px]">patients served annually</div>
+</div>
+<div>
+<div class="text-[40px] font-bold text-primary">10+</div>
+<div class="text-on-surface-variant text-[14px]">healthcare providers on staff</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="relative group">
+<div class="aspect-video relative rounded-[32px] overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic wide shot of a modern hospital lobby featuring expansive glass walls, lush indoor greenery, and a minimalist information desk. Soft, natural sunlight floods the space, creating a warm and welcoming atmosphere. The architectural style is futuristic yet inviting, with white surfaces and subtle blue accents that reflect the hospital's commitment to high-tech, compassionate care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5XJIVDMqrKk_TpX5fOx48ogHdv-f-W1maygHA4_cTQsbcavZuxYCuPvMadCw6h1RmZ-izgPO9c4w9nZ_oVLTJ5rTldxZWDI9DSH86A2AGdJPmre2R32WjT4C3IhiQiImC_hzyVxB6KYwTVn3g357zesKNby24GbT8vNcdA5pDs0_BZ_Q6BPlHm7BdaM3TJX1tPCFgotpV8T-71lYvCUqdAsVwc5dP8Qekh29RRGfUrtOepz67QLyybLuAtO0yjggppXju6d-Fuhms"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center">
+<button class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-primary shadow-2xl hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary-container rounded-3xl -z-10 rotate-12 opacity-30"></div>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] mb-4">About Us</h2>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">MediCare Global is a team of experienced medical professionals</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                        Founded on the principles of integrity and clinical excellence, we have grown from a local clinic to a world-renowned medical network. Our facility integrates cutting-edge diagnostics with a human-centric approach that prioritizes patient comfort.
+                    </p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="font-body-md text-on-surface font-medium">Advanced Robotic Surgery Systems</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="font-body-md text-on-surface font-medium">24/7 Emergency &amp; Critical Care</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="font-body-md text-on-surface font-medium">International Patient Coordination</span>
+</li>
+</ul>
+<button class="border-2 border-primary text-primary px-8 py-3 rounded-xl font-bold hover:bg-primary hover:text-on-primary transition-colors">
+                        Learn More Our History
+                    </button>
+</div>
+</div>
+</section>
+<!-- Statistics Bar -->
+<section class="bg-primary py-12 relative overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-on-primary relative z-10">
+<div>
+<div class="text-headline-lg font-bold mb-1">30+</div>
+<div class="font-label-md text-label-md opacity-80">Years With You</div>
+</div>
+<div>
+<div class="text-headline-lg font-bold mb-1">38+</div>
+<div class="font-label-md text-label-md opacity-80">Awards Won</div>
+</div>
+<div>
+<div class="text-headline-lg font-bold mb-1">250+</div>
+<div class="font-label-md text-label-md opacity-80">Specialist Doctors</div>
+</div>
+<div>
+<div class="text-headline-lg font-bold mb-1">100,000+</div>
+<div class="font-label-md text-label-md opacity-80">Happy Patients</div>
+</div>
+</div>
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+</section>
+<!-- Our Experts Section -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-16">
+<div class="max-w-xl">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Meet Our Experts</h2>
+<p class="font-body-md text-on-surface-variant mt-4">Our specialists are world-renowned leaders in their respective fields, dedicated to continuous medical innovation and patient-centered healing.</p>
+</div>
+<button class="hidden md:flex items-center gap-2 text-primary font-bold">
+                        View All Doctors <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter justify-center max-w-5xl mx-auto">
+<!-- Doctor 1 -->
+<div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-outline-variant/30">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional male cardiologist of South Asian descent, smiling warmly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ3z0JKpfj49BinEPSJzdZ0FmkjNN7oCrzNiNljjZ6NA0qLaScWFvOZOjTKsJKvnLuJxxn5ppEcixv9LL0Q7vZTS76GF01NQC_W4doPu3awOyiRSFrX-r7ccmvyNby_6m3Iy69dm9adHff_oMfLBUl4GCbcBSdK6mooSrhPm_jTN-mLlrWN7Ct4_N7jaM2s25mXJugP9mnPOLPh-gt61ZnkDpX-ZntlyhUJ3v5_sTQ84jhjUvL7vC0yGejR1zc5hVdyJchKmz-mjKy"/>
+</div>
+<div class="p-6 text-center">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Dr. Rajesh Kumar</h4>
+<p class="text-primary font-medium mb-6">Cardiology Director</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="text-label-md font-bold text-on-surface-variant bg-surface-container py-3 rounded-xl hover:bg-surface-container-highest transition-colors">Profile</button>
+<button class="text-label-md font-bold text-on-primary bg-primary py-3 rounded-xl hover:opacity-90 transition-opacity">Book</button>
+</div>
+</div>
+</div>
+<!-- Doctor 2 -->
+<div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-outline-variant/30">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A female orthopedic surgeon of Caucasian descent, smiling confidently." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZjhWQasze9sO_UmQnsqo9a6J8cMtmcVCPaScjeTXY_L_jEyWLL6VY5PQXKSnQOfKqyiLRcfWTrZmxdhDHj3kymTLTKLmNh-skGCEpRyKTljJTT-uUwou7HdGG88zXnd1LYe7W65aQkeIWWFeSz9krV4ilE-veHJ7fV53vwX-ZrC3l2EVM8pl2YiJUP-z8M5b8KLZxlVCLRdR8XN4G68gFxo2lRoFUzzQSwLhBhpVssmNkxPUVnJ6y3AIQilJ312ISKhZdlKr7T22T"/>
+</div>
+<div class="p-6 text-center">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Dr. Sarah Jenkins</h4>
+<p class="text-primary font-medium mb-6">Orthopedic Specialist</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="text-label-md font-bold text-on-surface-variant bg-surface-container py-3 rounded-xl hover:bg-surface-container-highest transition-colors">Profile</button>
+<button class="text-label-md font-bold text-on-primary bg-primary py-3 rounded-xl hover:opacity-90 transition-opacity">Book</button>
+</div>
+</div>
+</div>
+<!-- Doctor 3 -->
+<div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-outline-variant/30">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A friendly female pediatrician of Latin descent, smiling at the camera." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjJC8WpIVBy3veK3zdwwl9gWDGOEpnPiwxw3C97XEMhFCtRkEn72w9YYiy5l1ZwiVDCnkHJ8wU3qVUDpiU8lcq4oMT8ihk_BWOKjDsJFSbH6bdUN9uECEQH0h4dohvp08ZZ92me7_j0vxYeSVSoXoGXiR5T83NOl5oeqzMjf77Rgaedwxmb4t9zkDWpqHMckUJNkAS2rG3MEriUpjnrmfQ2-UI-uib1WR_Z-DgWfjagcPiuwWKjQl8FwRgt12l16gTtaNElDsxgcX"/>
+</div>
+<div class="p-6 text-center">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Dr. Maria Elena</h4>
+<p class="text-primary font-medium mb-6">Pediatrics Care</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="text-label-md font-bold text-on-surface-variant bg-surface-container py-3 rounded-xl hover:bg-surface-container-highest transition-colors">Profile</button>
+<button class="text-label-md font-bold text-on-primary bg-primary py-3 rounded-xl hover:opacity-90 transition-opacity">Book</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Specialized Services Section -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Our Specialized Services</h2>
+<p class="text-on-surface-variant mt-4 max-w-2xl mx-auto">We offer comprehensive expert care through meticulous diagnostics and imaging, all under one roof to ensure the best patient outcomes.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="p-8 bg-white rounded-3xl border border-outline-variant shadow-sm hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-on-primary transition-colors">cardiology</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">Cardiology Unit</h4>
+<p class="text-on-surface-variant mb-6">Advanced heart screenings, robotic-assisted surgery, and comprehensive post-operative cardiac rehabilitation.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group/link" href="#">Read More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+<!-- Service 2 -->
+<div class="p-8 bg-white rounded-3xl border border-outline-variant shadow-sm hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-on-primary transition-colors">neurology</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">Neurology Sciences</h4>
+<p class="text-on-surface-variant mb-6">Specialized care for neurological disorders utilizing 3T MRI diagnostics and expert neurosurgical teams.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group/link" href="#">Read More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+<!-- Service 3 -->
+<div class="p-8 bg-white rounded-3xl border border-outline-variant shadow-sm hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-on-primary transition-colors">radiology</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">Radiology Imaging</h4>
+<p class="text-on-surface-variant mb-6">High-precision diagnostic imaging including PET-CT scans and advanced ultrasound for accurate medical reports.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group/link" href="#">Read More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+<!-- Service 4 -->
+<div class="p-8 bg-white rounded-3xl border border-outline-variant shadow-sm hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-on-primary transition-colors">bloodtype</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">Blood Center</h4>
+<p class="text-on-surface-variant mb-6">A high-tech hematology laboratory supporting all specialized medical and surgical branches in the network.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group/link" href="#">Read More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+<!-- Service 5 -->
+<div class="p-8 bg-white rounded-3xl border border-outline-variant shadow-sm hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-on-primary transition-colors">emergency</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-4">24/7 Emergency</h4>
+<p class="text-on-surface-variant mb-6">Rapid response trauma center equipped to handle life-threatening situations with dedicated emergency physicians.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group/link" href="#">Read More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+<!-- Promotional Card -->
+<div class="p-8 bg-primary rounded-3xl shadow-xl flex flex-col justify-center text-on-primary">
+<h4 class="font-headline-sm text-headline-sm mb-4">Looking for an Expert?</h4>
+<p class="opacity-80 mb-8">MediCare Global is home to some of the most eminent doctors in the world. Find your specialist now.</p>
+<button class="bg-white text-primary px-6 py-4 rounded-xl font-bold flex items-center justify-between group">
+                        Find A Doctor
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Global Care Statistics -->
+<section class="py-section-gap bg-surface-container">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Global Care Statistics</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-primary text-center">
+<span class="material-symbols-outlined text-primary text-[40px] mb-4">medical_services</span>
+<div class="text-[32px] font-bold text-on-surface mb-2">50+</div>
+<div class="text-on-surface-variant font-medium">Specialties</div>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-primary text-center">
+<span class="material-symbols-outlined text-primary text-[40px] mb-4">bed</span>
+<div class="text-[32px] font-bold text-on-surface mb-2">200+</div>
+<div class="text-on-surface-variant font-medium">Bed Capacity</div>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-primary text-center">
+<span class="material-symbols-outlined text-primary text-[40px] mb-4">precision_manufacturing</span>
+<div class="text-[32px] font-bold text-on-surface mb-2">15,000+</div>
+<div class="text-on-surface-variant font-medium">Surgeries/Year</div>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-primary text-center">
+<span class="material-symbols-outlined text-primary text-[40px] mb-4">mood</span>
+<div class="text-[32px] font-bold text-on-surface mb-2">98%</div>
+<div class="text-on-surface-variant font-medium">Patient Satisfaction</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Medical Breakthroughs -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<img class="w-full rounded-[40px] shadow-2xl" data-alt="A high-tech clinical research laboratory with scientists working on breakthroughs." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU62qDQ4f2N4HEfKQpAZiOiLPcwxnWbu-yqZ9-OPXOOlsK8Ef_fCM2iA0N0crVaHUcNWGp73Ge-kPDO1ZdLrBasPcU8KMYoupyhSxbJJesLk076iuWEAXu_LTpfrAzw4fJyM9ALIyAUWCTwqBa2vGi_VJn340yrsyCiu-iqm6-Nb-ApZa2zs6dqxLGeihqNbl4b_YYn4bhUdLBRJpjB__ESCTV-bqr6A_0J4C2Qcj3XHxl_h0nK5x0_UdDTR0dAwlHI28ys_7PGO0I"/>
+<div class="absolute -top-6 -left-6 bg-white p-6 rounded-3xl shadow-xl border border-outline-variant max-w-[200px]">
+<div class="text-primary font-bold text-headline-sm mb-1">New Patent</div>
+<p class="text-label-md text-on-surface-variant">In Lung Cancer Therapy</p>
+</div>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">Pioneering Cancer Treatment</h2>
+<div class="prose prose-lg text-on-surface-variant">
+<p class="mb-6">Our research wing has recently unveiled a groundbreaking immunotherapy protocol that significantly improves patient survival rates. This development is part of our ongoing commitment to bringing tomorrow's medicine to our patients today.</p>
+<p class="mb-8">By integrating AI-driven diagnostics with personalized genomic mapping, we can now target malignancies with surgical precision while minimizing side effects for the patient.</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold flex items-center gap-2 group shadow-lg shadow-primary/20">
+                        Read Full Case Study
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Stories of Hope (Testimonials) -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Stories of Hope &amp; Recovery</h2>
+<p class="text-on-surface-variant mt-4">Hear directly from the people whose lives have been transformed by our care.</p>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Testimonial 1 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-8">"The cardiac team here saved my life. Their professionalism and empathy during my surgery were truly world-class."</p>
+<div class="flex items-center gap-4">
+<img alt="Patient" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZoX-jkcnUCbUTUs2WojmqS5FflqsjWIBTykUMFOLbaUm0fiC-zZXDp-HpXglXL8t5KfvA4jCV0HS4XBDianiBDWhTaWhZnYZX88Mfj_dMmbQE4ZA5Rf0RdKIPQbTWAjcB5fCAT08zAaYsqKIPY4can78XnJt7RNDu9OaZM6LXE4UZet1Bp-1LT9M3AhZ7UxMrWgm2H5QuHyT2KSSvH1tXixU9XVoD7Ark4UouPDlaxkNcv4hzkImsjmQBi_DE0GhY0TZ4ft0sTOsB"/>
+<div>
+<div class="font-bold text-on-surface">Robert Wilson</div>
+<div class="text-label-md text-on-surface-variant">Cardiac Patient</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-8">"As a mother, finding a pediatrician you trust is everything. MediCare Global has become family to us over the years."</p>
+<div class="flex items-center gap-4">
+<img alt="Patient" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsnBy_cywZoJYOwov4U_e8pjiQ0pIa_xRU-jkobz5a-9k07uHSDmXhiBqUM32BR5_jS2Hp-uLp-mU7fayMDuo98P5nMJ5zaXWlpXlVAHbnAHoaoPJdJQ5Em5ny1fpOzBuB_eaRF_GsIfKtQEr0VHtOQEGv4csp2ORSHq1MpV6Q_XwcGh0QDGASaklEU6ydl2Q5fwM1BfmI2NXR1xttcCHXYttII6aGvONHTsKN5hsTCIbsANFoQZ2KXwqaT8yvS3PXi0HRqUJA_hXl"/>
+<div>
+<div class="font-bold text-on-surface">Emily Thompson</div>
+<div class="text-label-md text-on-surface-variant">Mother of Two</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-8">"My knee replacement surgery went smoother than I ever imagined. I'm back on the hiking trails already!"</p>
+<div class="flex items-center gap-4">
+<img alt="Patient" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnv-LCp8OV75bQbD9mlOQgBHprclgGznf0EZkwW2TRT8a9wo4V-azssHsd5oPhONc-muldWbcUffJSxhx58T0tm8Fhgy8dJqHfypYGHO13aVfmBqeifwznN8N7bp_vVTBmnpYa_nql7Yt-Q9fhALA2Q1JAGB-Y_OnuH68nmwhSIrY0zRXB_Xn6ZxeqVDbj4tunUX_OPCo8w_cwnewu5LHVMFi_7LC08gDoaiuNYfbcF2biqxNpVsIYrRa-xVVdeXY3_ww6mREtv8YG"/>
+<div>
+<div class="font-bold text-on-surface">Arthur Vance</div>
+<div class="text-label-md text-on-surface-variant">Orthopedic Patient</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 4 -->
+<div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-8">"The facilities are like a luxury hotel, but the medical expertise is what really makes this place stand out."</p>
+<div class="flex items-center gap-4">
+<img alt="Patient" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzJ9Fn7L6fAQVH9U9wvlPFo7zl5KYy99Luup7e0uSqei_y2PDVCVj8Lka5YdYS7Dp1pLg5-S4TTfyuZOPIMFleBcrNCwHjwuy_P7xDiRg_MYPeM7ZbC9uO6cqbtxBKaZYHNOfRKqJ1HWRCSC3IT55rbFHKvrcIPF5dSacGdR79eZi81fWHTlA_akemIzx3ZWCu7V3sMu5Iyx94booY-6KIZymkLdO7teDA6yLSSOiuigciTCgWIJedMGSuakFvmHOtd1C9-OzQ1Evb"/>
+<div>
+<div class="font-bold text-on-surface">Sarah Johnson</div>
+<div class="text-label-md text-on-surface-variant">Wellness Program</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-section-gap max-w-[800px] mx-auto px-margin-mobile">
+<h2 class="font-headline-lg text-headline-lg text-center text-on-surface mb-16">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<details class="group bg-white rounded-2xl border border-outline-variant overflow-hidden" open="">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-on-surface">
+                        How do I book an appointment?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant">
+                        You can book an appointment through our website using the "Book Appointment" button, by calling our 24/7 helpline, or by visiting our hospital directly. We offer both physical and tele-consultations.
+                    </div>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant overflow-hidden">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-on-surface">
+                        What are visiting hours?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant">
+                        Standard visiting hours are from 10:00 AM to 8:00 PM daily. However, for critical care units, visiting hours may vary and are restricted to immediate family members only.
+                    </div>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant overflow-hidden">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-on-surface">
+                        Do you accept international insurance?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant">
+                        Yes, we partner with major international health insurance providers including Bupa, Allianz, and Aetna. Please check with our patient services desk for a full list of partners.
+                    </div>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant overflow-hidden">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-on-surface">
+                        What specialized centers do you have?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant">
+                        We have Centers of Excellence in Cardiology, Oncology, Orthopedics, Neurology, Gastroenterology, and a dedicated Mother &amp; Child wing.
+                    </div>
+</details>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-low border-t border-outline-variant py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-1">
+<div class="text-headline-sm font-headline-sm font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined fill-1">shield_with_heart</span>
+                    MediCare Global
+                </div>
+<p class="text-body-md text-on-surface-variant mb-6">Dedicated to compassionate care and medical excellence across the globe.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">call</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="text-primary font-bold mb-6 font-label-md text-label-md">QUICK LINKS</h5>
+<ul class="space-y-4 font-label-md text-label-md text-on-surface-variant">
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Emergency Services</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Specialist Directory</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Medical Records</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-primary font-bold mb-6 font-label-md text-label-md">DEPARTMENTS</h5>
+<ul class="space-y-4 font-label-md text-label-md text-on-surface-variant">
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Cardiology</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Neurology</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Orthopedics</a></li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Oncology</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-primary font-bold mb-6 font-label-md text-label-md">CONTACT US</h5>
+<ul class="space-y-4 font-label-md text-label-md text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">location_on</span>
+<span>123 Medical Plaza, Global Healthcare District, CA 90210</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">call</span>
+<span>+1 (800) 555-CARE</span>
+</li>
+<li><a class="hover:text-primary underline underline-offset-4" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-16 pt-8 border-t border-outline-variant text-center">
+<p class="text-label-md text-on-surface-variant">© 2024 MediCare Hospital Network. Dedicated to compassionate care and medical excellence.</p>
+</div>
+</footer>
+</body></html>
