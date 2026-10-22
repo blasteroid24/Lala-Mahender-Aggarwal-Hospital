@@ -1,126 +1,178 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'motion/react'
+import { ArrowUpRight, CalendarCheck, Clock, Mail, MapPin, Menu, Phone, Siren, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { hospital, navLinks } from '@/data/site'
+import { Logo } from '@/components/ui/Logo'
+import { useBooking } from '@/components/booking/BookingProvider'
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { openBooking } = useBooking()
+  const { pathname } = useLocation()
+  // The menu is "open for a path" — navigating anywhere closes it automatically
+  const [menuPath, setMenuPath] = useState<string | null>(null)
+  const menuOpen = menuPath === pathname
+  const setMenuOpen = (open: boolean) => setMenuPath(open ? pathname : null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Find Doctor', path: '#' },
-    { name: 'Blog', path: '#' },
-    { name: 'Contact', path: '#' },
-  ]
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+  }, [menuOpen])
 
   return (
     <>
-      <header className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isScrolled || isMenuOpen ? "bg-white/90 backdrop-blur-md shadow-sm h-16" : "bg-transparent h-20"
-      )}>
-        <div className="max-w-[1400px] mx-auto h-full px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className={cn(
-              "w-8 h-8 md:w-9 md:h-9 rounded-full border-2 flex items-center justify-center transition-all duration-500",
-              isScrolled || isMenuOpen ? "border-primary text-primary" : "border-white text-white"
-            )}>
-              <span className="material-symbols-outlined text-base md:text-lg font-bold">shield_with_heart</span>
-            </div>
-            <div className="flex flex-col">
-              <span className={cn(
-                "text-base md:text-lg font-bold tracking-tighter leading-none transition-colors duration-500",
-                isScrolled || isMenuOpen ? "text-slate-900" : "text-white"
-              )}>
-                <span className="md:hidden">LMA</span>
-                <span className="hidden md:inline">Lala Mahender Aggarwal</span>
-              </span>
-              <span className={cn(
-                "text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] transition-colors duration-500",
-                isScrolled || isMenuOpen ? "text-primary" : "text-white/60"
-              )}>
-                Hospital
-              </span>
-            </div>
-          </Link>
+      {/* Utility bar */}
+      <div className="relative z-50 hidden bg-brand-950 text-[13px] text-brand-100/80 md:block">
+        <div className="container-x flex h-10 items-center justify-between">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2">
+              <Clock className="size-3.5 text-mint-400" /> OPD {hospital.hours.opd}
+            </span>
+            <a href={`mailto:${hospital.email}`} className="hidden items-center gap-2 transition hover:text-white lg:flex">
+              <Mail className="size-3.5 text-mint-400" /> {hospital.email}
+            </a>
+            <a href={hospital.mapsUrl} target="_blank" rel="noreferrer" className="hidden items-center gap-2 transition hover:text-white xl:flex">
+              <MapPin className="size-3.5 text-mint-400" /> {hospital.address}
+            </a>
+          </div>
+          <a href={`tel:${hospital.emergencyPhone}`} className="group flex items-center gap-2 font-semibold text-white">
+            <span className="relative flex size-2">
+              <span className="absolute inset-0 animate-ping rounded-full bg-alert" />
+              <span className="relative size-2 rounded-full bg-alert" />
+            </span>
+            24/7 Emergency:
+            <span className="text-mint-300 transition group-hover:text-white">{hospital.emergencyPhone}</span>
+          </a>
+        </div>
+      </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
+      {/* Main nav */}
+      <header
+        className={cn(
+          'sticky top-0 z-50 transition-all duration-500 ease-out-expo',
+          scrolled ? 'border-b border-line/80 bg-white/80 shadow-soft backdrop-blur-xl' : 'bg-white',
+        )}
+      >
+        <div className={cn('container-x flex items-center justify-between gap-6 transition-all duration-500', scrolled ? 'h-16' : 'h-20')}>
+          <Logo />
+
+          <nav className="hidden items-center gap-1 rounded-full border border-line bg-canvas/70 p-1 lg:flex" aria-label="Main">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
+              <NavLink
+                key={link.path}
                 to={link.path}
-                className={cn(
-                  "text-[12px] font-bold uppercase tracking-widest transition-all duration-300 hover:opacity-100 hover:text-primary",
-                  isScrolled ? "text-slate-600 opacity-70" : "text-white opacity-80"
-                )}
+                end={link.path === '/'}
+                className={({ isActive }) =>
+                  cn(
+                    'relative rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                    isActive ? 'text-brand-700' : 'text-ink-soft hover:text-ink',
+                  )
+                }
               >
-                {link.name}
-              </Link>
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-white shadow-soft"
+                        transition={{ type: 'spring', damping: 30, stiffness: 350 }}
+                      />
+                    )}
+                    <span className="relative">{link.name}</span>
+                  </>
+                )}
+              </NavLink>
             ))}
           </nav>
 
-          {/* Right Section: Mobile Toggle */}
-          <div className="flex items-center lg:hidden">
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={cn(
-                "p-2 transition-colors duration-500 z-50",
-                isScrolled || isMenuOpen ? "text-slate-900" : "text-white"
-              )}
+          <div className="flex items-center gap-2">
+            <a
+              href={`tel:${hospital.phone}`}
+              className="hidden size-11 place-items-center rounded-full border border-line text-ink-soft transition hover:border-brand-300 hover:text-brand-700 sm:grid xl:hidden"
+              aria-label={`Call ${hospital.phone}`}
             >
-              <span className="material-symbols-outlined text-[32px]">
-                {isMenuOpen ? 'close' : 'menu'}
+              <Phone className="size-4.5" />
+            </a>
+            <a href={`tel:${hospital.phone}`} className="mr-2 hidden items-center gap-3 xl:flex">
+              <span className="grid size-10 place-items-center rounded-full bg-brand-50 text-brand-600">
+                <Phone className="size-4" />
               </span>
+              <span className="leading-tight">
+                <span className="block text-[11px] text-muted">Appointments</span>
+                <span className="text-sm font-semibold">{hospital.phone}</span>
+              </span>
+            </a>
+            <button onClick={() => openBooking()} className="btn btn-primary hidden sm:inline-flex">
+              <CalendarCheck className="size-4" />
+              Book Appointment
+            </button>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="grid size-11 place-items-center rounded-full bg-ink text-white lg:hidden"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
-      <div className={cn(
-        "fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out lg:hidden",
-        isMenuOpen ? "translate-x-0" : "translate-x-full"
-      )}>
-        <div className="flex flex-col h-full pt-32 px-10 gap-8">
-          {navLinks.map((link, idx) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsMenuOpen(false)}
-              className={cn(
-                "text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 flex items-center justify-between group",
-                "animate-in fade-in slide-in-from-right duration-500"
-              )}
-              style={{ animationDelay: `${idx * 100}ms` }}
-            >
-              {link.name}
-              <span className="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
-            </Link>
-          ))}
-          
-          <div className="mt-auto mb-16 space-y-6">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Emergency Contact</div>
-            <div className="text-xl font-bold text-primary flex items-center gap-2">
-              <span className="material-symbols-outlined">call</span>
-              +91 123 456 7890
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[45] overflow-y-auto bg-white pt-20 lg:hidden"
+          >
+            <div className="container-x flex min-h-full flex-col py-6">
+              <nav className="flex flex-col" aria-label="Mobile">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04 * i, ease: [0.16, 1, 0.3, 1], duration: 0.5 }}
+                  >
+                    <Link
+                      to={link.path}
+                      className="flex items-center justify-between border-b border-line py-5 font-heading text-2xl font-semibold"
+                    >
+                      {link.name}
+                      <ArrowUpRight className="size-5 text-brand-500" />
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+              <div className="mt-auto space-y-3 pt-10 pb-8">
+                <a href={`tel:${hospital.emergencyPhone}`} className="flex items-center gap-4 rounded-2xl bg-alert-soft p-4">
+                  <span className="grid size-12 place-items-center rounded-full bg-alert text-white">
+                    <Siren className="size-5" />
+                  </span>
+                  <span>
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-alert">24/7 Emergency</span>
+                    <span className="font-heading text-lg font-bold">{hospital.emergencyPhone}</span>
+                  </span>
+                </a>
+                <button onClick={() => { setMenuOpen(false); openBooking() }} className="btn btn-primary w-full py-4 text-base">
+                  <CalendarCheck className="size-5" /> Book Appointment
+                </button>
+              </div>
             </div>
-            <button className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-sm uppercase tracking-widest shadow-xl shadow-primary/20">
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

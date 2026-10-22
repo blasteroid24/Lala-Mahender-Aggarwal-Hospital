@@ -1,61 +1,56 @@
-# Requiem React App Boilerplate
+# Hospital Website Template — Lala Mahender Aggarwal Hospital
 
-A blazing fast, modern React scaffolding setup built with Vite. It provides a beautiful, minimal, and fully responsive starting point for web applications.
+A fast, modern, fully responsive hospital website built with React 19, Vite, Tailwind CSS v4 and Motion.
 
-## Tech Stack
+## Getting started
 
-- **Framework**: [React 18](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Routing**: [React Router v7](https://reactrouter.com/)
-- **Language**: TypeScript
-
-## Features
-
-- **Lightning Fast HMR**: Instant feedback during development thanks to Vite.
-- **Beautiful Minimal UI**: A clean, typography-focused starting template with custom background gradients and modern glassmorphism elements.
-- **Fully Responsive**: Out-of-the-box support for mobile (phones), tablets (iPads), and desktop screens. 
-- **Mobile Menu Toggle**: A built-in animated mobile navigation overlay.
-- **Pre-configured Paths**: Aliases set up out of the box (`@/` maps to `src/`).
-
-## Screenshots & Demos
-
-Check out the responsive layout across devices:
-
-- **Desktop View**:
-
-![Desktop View 1](https://res.cloudinary.com/duw6ht4tk/image/upload/v1778145181/Screenshot_2026-05-07_144030_kg2d6z.png)
-
-![Desktop View 2](https://res.cloudinary.com/duw6ht4tk/image/upload/v1778145180/Screenshot_2026-05-07_144040_pabn10.png)
-
-- **Mobile View**:
-
-![Mobile View](https://res.cloudinary.com/duw6ht4tk/image/upload/v1778145180/Screenshot_2026-05-07_144058_lpitqw.png)
-## Getting Started
-
-### 1. Install dependencies
 ```bash
 npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build in /dist
 ```
 
-### 2. Start the development server
-```bash
-npm run dev
-```
+## Re-using this template for another hospital
 
-### 3. Build for production
-```bash
-npm run build
-```
+1. **Content** — edit `src/data/site.ts`. Hospital name, phones, address, specialities, doctors, stats,
+   case stories, testimonials, health packages, FAQs and milestones all live there.
+2. **Brand colours** — edit the `--color-brand-*` / `--color-mint-*` tokens at the top of `src/index.css`.
+3. **Images** — replace the WebP files in `public/img/` (keep the same names, or update paths in `site.ts`).
+4. **Booking** — `src/components/booking/BookingForm.tsx` → `handleSubmit` is front-end only.
+   Connect it to your backend, EmailJS, WhatsApp API or CRM before launch.
 
-## Project Structure
+> All names, figures, prices, ratings and testimonials in `site.ts` are placeholders — replace them with
+> verified information from the client before going live.
+
+## Pages
+
+| Route           | Page                                                       |
+| --------------- | ---------------------------------------------------------- |
+| `/`             | Home — hero search, stats, specialities, technology, doctors, case stories, testimonials, packages, FAQ, booking |
+| `/specialities` | All centres of excellence with deep links (`#cardiology`) |
+| `/doctors`      | Doctor directory with search + speciality filter (`?q=` / `?speciality=`) |
+| `/about`        | Mission, values, timeline                                  |
+| `/contact`      | Contact channels, booking form, map                        |
+
+## Project structure
 
 ```
 src/
+├── data/site.ts             # ← all content lives here
 ├── components/
-│   └── layout/         # Header and Footer components
-├── pages/              # Route components (Home, About)
-├── App.tsx             # Main router configuration
-├── main.tsx            # React application entry point
-└── index.css           # Global Tailwind imports and custom styles
+│   ├── booking/             # Booking modal, provider (useBooking) and form
+│   ├── cards/               # DoctorCard
+│   ├── home/                # Homepage sections
+│   ├── layout/              # Header, Footer, MobileDock, ScrollManager
+│   └── ui/                  # Reveal, Counter, Accordion, SectionHeading, PageHero, Logo
+├── pages/                   # Route components (inner pages are lazy-loaded)
+└── index.css                # Design tokens + component classes
 ```
+
+## Performance & accessibility notes
+
+- Images are pre-compressed WebP (~1.4 MB total vs ~20 MB of original PNG/JPEG); below-the-fold images lazy-load.
+- Icons are tree-shaken SVGs (lucide-react) — no icon font download.
+- Inner pages are code-split; the hero image is preloaded.
+- Animations respect `prefers-reduced-motion`.
+- Mobile gets a thumb-reachable action dock (Emergency · Book · WhatsApp · Call).
