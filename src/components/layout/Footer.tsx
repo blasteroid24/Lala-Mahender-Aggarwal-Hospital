@@ -14,7 +14,7 @@ const socials = [
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-brand-950 pb-28 text-brand-100/70 lg:pb-0">
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[30rem] w-[72rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(22_135_159/0.2),transparent)]" />
 
       {/* Emergency strip */}
       <div className="container-x relative pt-16">

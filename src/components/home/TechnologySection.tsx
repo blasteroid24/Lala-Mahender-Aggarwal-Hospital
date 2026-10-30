@@ -1,7 +1,7 @@
 import { facilities } from '@/data/site'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
-import { cn } from '@/lib/utils'
+import { cn, srcSet } from '@/lib/utils'
 
 const layout = [
   'md:col-span-2 md:row-span-2 min-h-[420px]',
@@ -15,8 +15,8 @@ export function TechnologySection() {
   return (
     <section className="section relative overflow-hidden bg-brand-950 text-white">
       <div className="bg-noise pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute top-0 right-0 size-[40rem] translate-x-1/3 -translate-y-1/2 rounded-full bg-brand-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[30rem] -translate-x-1/2 translate-y-1/2 rounded-full bg-mint-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute top-0 right-0 size-[52rem] translate-x-1/3 -translate-y-1/2 bg-[radial-gradient(closest-side,rgb(22_135_159/0.25),transparent)]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 size-[40rem] -translate-x-1/2 translate-y-1/2 bg-[radial-gradient(closest-side,rgb(34_195_155/0.1),transparent)]" />
 
       <div className="container-x relative">
         <SectionHeading
@@ -31,6 +31,8 @@ export function TechnologySection() {
             <Reveal key={f.title} delay={i * 0.06} className={cn('group relative overflow-hidden rounded-3xl', layout[i])}>
               <img
                 src={f.img}
+                srcSet={srcSet(f.img)}
+                sizes="(min-width: 768px) 50vw, 100vw"
                 alt={f.title}
                 loading="lazy"
                 decoding="async"

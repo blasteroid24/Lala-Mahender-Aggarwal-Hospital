@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ShieldCheck, X } from 'lucide-react'
 import { BookingForm } from './BookingForm'
 import type { BookingPreset } from './BookingProvider'
@@ -30,14 +30,14 @@ export function BookingDialog({ open, preset, onClose }: BookingDialogProps) {
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6">
-          <motion.div
+          <m.div
             className="absolute inset-0 bg-ink/50 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          <motion.div
+          <m.div
             ref={panelRef}
             tabIndex={-1}
             role="dialog"
@@ -70,7 +70,7 @@ export function BookingDialog({ open, preset, onClose }: BookingDialogProps) {
               </button>
             </div>
             <BookingForm preset={preset} onDone={onClose} compact />
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>

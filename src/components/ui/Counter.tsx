@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { animate, useInView, useReducedMotion } from 'motion/react'
+import { useInView, useReducedMotion } from 'motion/react'
 
 type CounterProps = {
   value: number
@@ -21,14 +21,17 @@ export function Counter({ value, suffix = '', duration = 1.8, className }: Count
       node.textContent = `${value.toLocaleString('en-IN')}${suffix}`
       return
     }
-    const controls = animate(0, value, {
-      duration,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => {
-        node.textContent = `${Math.round(v).toLocaleString('en-IN')}${suffix}`
-      },
-    })
-    return () => controls.stop()
+    // Ease-out-expo count-up via rAF (keeps motion's animation engine out of the main bundle)
+    let frame = 0
+    const start = performance.now()
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / (duration * 1000), 1)
+      const v = value * (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
+      node.textContent = `${Math.round(v).toLocaleString('en-IN')}${suffix}`
+      if (t < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
   }, [inView, value, suffix, duration, reduce])
 
   return (

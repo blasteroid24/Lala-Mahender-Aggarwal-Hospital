@@ -4,6 +4,7 @@ import { PageHero } from '@/components/ui/PageHero'
 import { Reveal } from '@/components/ui/Reveal'
 import { Counter } from '@/components/ui/Counter'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { srcSet } from '@/lib/utils'
 
 const valueIcons = [ShieldCheck, Lightbulb, HandHeart, Award]
 
@@ -21,10 +22,10 @@ export default function About() {
         <div className="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className="relative">
             <div className="overflow-hidden rounded-[36px]">
-              <img src="/img/tech1.webp" alt="Our critical care unit" loading="lazy" className="aspect-[4/4.2] w-full object-cover" />
+              <img src="/img/tech1.webp" srcSet={srcSet('/img/tech1.webp')} sizes="(min-width: 1024px) 400px, 50vw" alt="Our critical care unit" loading="lazy" className="aspect-[4/4.2] w-full object-cover" />
             </div>
             <div className="absolute -right-4 -bottom-6 hidden w-56 overflow-hidden rounded-3xl border-[6px] border-white shadow-lift sm:block md:-right-8">
-              <img src="/img/case2.webp" alt="A cardiologist explaining a scan to a patient" loading="lazy" className="aspect-square w-full object-cover" />
+              <img src="/img/case2.webp" srcSet={srcSet('/img/case2.webp')} sizes="(min-width: 1024px) 400px, 50vw" alt="A cardiologist explaining a scan to a patient" loading="lazy" className="aspect-square w-full object-cover" />
             </div>
           </Reveal>
           <Reveal delay={0.1}>

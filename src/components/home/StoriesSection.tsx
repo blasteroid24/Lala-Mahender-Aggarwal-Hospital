@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ChevronDown, Users } from 'lucide-react'
 import { caseStories } from '@/data/site'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { cn } from '@/lib/utils'
+import { cn, srcSet } from '@/lib/utils'
 
 export function StoriesSection() {
   const [active, setActive] = useState(0)
@@ -53,7 +53,7 @@ export function StoriesSection() {
                     </div>
                   </div>
                   {isActive && (
-                    <motion.span layoutId="story-bar" className="absolute top-6 bottom-6 left-0 w-1 rounded-r-full bg-brand-600" />
+                    <m.span layoutId="story-bar" className="absolute top-6 bottom-6 left-0 w-1 rounded-r-full bg-brand-600" />
                   )}
                 </button>
               )
@@ -63,7 +63,7 @@ export function StoriesSection() {
           {/* Detail */}
           <div className="lg:col-span-7">
             <AnimatePresence mode="wait">
-              <motion.article
+              <m.article
                 key={active}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -72,11 +72,13 @@ export function StoriesSection() {
                 className="overflow-hidden rounded-[32px] border border-line bg-white shadow-soft"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
-                  <motion.img
+                  <m.img
                     initial={{ scale: 1.08 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     src={story.image}
+                    srcSet={srcSet(story.image)}
+                    sizes="(min-width: 1024px) 800px, 100vw"
                     alt={story.title}
                     loading="lazy"
                     className="size-full object-cover"
@@ -91,7 +93,7 @@ export function StoriesSection() {
                   <p className="text-ink-soft md:text-lg">{story.summary}</p>
                   <AnimatePresence initial={false}>
                     {expanded && (
-                      <motion.div
+                      <m.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -100,7 +102,7 @@ export function StoriesSection() {
                         <div className="space-y-3 pt-4 text-sm text-ink-soft md:text-base">
                           {story.content.map((p) => <p key={p}>{p}</p>)}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                   <div className="mt-6 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
@@ -117,7 +119,7 @@ export function StoriesSection() {
                     </button>
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             </AnimatePresence>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useMemo, useState, type FormEvent } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { m, AnimatePresence } from 'motion/react'
 import { ArrowRight, CalendarCheck, Check, Hospital, Video } from 'lucide-react'
 import { doctors, hospital, specialities } from '@/data/site'
 import { cn } from '@/lib/utils'
@@ -54,7 +54,7 @@ export function BookingForm({ preset = {}, onDone, compact }: BookingFormProps) 
   return (
     <AnimatePresence mode="wait" initial={false}>
       {submitted ? (
-        <motion.div
+        <m.div
           key="done"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -81,29 +81,29 @@ export function BookingForm({ preset = {}, onDone, compact }: BookingFormProps) 
               Done
             </button>
           )}
-        </motion.div>
+        </m.div>
       ) : (
-        <motion.form key="form" onSubmit={handleSubmit} className="space-y-6" exit={{ opacity: 0 }}>
+        <m.form key="form" onSubmit={handleSubmit} className="space-y-6" exit={{ opacity: 0 }}>
           {/* Consultation type */}
           <div className="grid grid-cols-2 gap-2 rounded-2xl bg-canvas p-1.5">
             {([
               { id: 'visit', label: 'Hospital visit', icon: Hospital },
               { id: 'video', label: 'Video consult', icon: Video },
-            ] as const).map((m) => (
+            ] as const).map((opt) => (
               <button
-                key={m.id}
+                key={opt.id}
                 type="button"
-                onClick={() => setMode(m.id)}
+                onClick={() => setMode(opt.id)}
                 className={cn(
                   'relative flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-colors',
-                  mode === m.id ? 'text-brand-700' : 'text-muted hover:text-ink',
+                  mode === opt.id ? 'text-brand-700' : 'text-muted hover:text-ink',
                 )}
               >
-                {mode === m.id && (
-                  <motion.span layoutId={`mode-pill-${compact ? 'c' : 'd'}`} className="absolute inset-0 rounded-xl bg-white shadow-soft" />
+                {mode === opt.id && (
+                  <m.span layoutId={`mode-pill-${compact ? 'c' : 'd'}`} className="absolute inset-0 rounded-xl bg-white shadow-soft" />
                 )}
-                <m.icon className="relative size-4" />
-                <span className="relative">{m.label}</span>
+                <opt.icon className="relative size-4" />
+                <span className="relative">{opt.label}</span>
               </button>
             ))}
           </div>
@@ -219,7 +219,7 @@ export function BookingForm({ preset = {}, onDone, compact }: BookingFormProps) 
           <p className="text-center text-xs text-muted">
             For medical emergencies, call <a href={`tel:${hospital.emergencyPhone}`} className="font-semibold text-alert">{hospital.emergencyPhone}</a> immediately.
           </p>
-        </motion.form>
+        </m.form>
       )}
     </AnimatePresence>
   )

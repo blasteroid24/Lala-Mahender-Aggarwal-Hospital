@@ -1,8 +1,8 @@
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { ArrowUpRight, BadgeCheck, CalendarDays, Languages } from 'lucide-react'
 import type { Doctor } from '@/data/site'
 import { specialities } from '@/data/site'
-import { cn } from '@/lib/utils'
+import { cn, srcSet } from '@/lib/utils'
 import { useBooking } from '@/components/booking/BookingProvider'
 
 function initials(name: string) {
@@ -20,7 +20,7 @@ export function DoctorCard({ doctor, className }: { doctor: Doctor; className?: 
   const Icon = spec?.icon
 
   return (
-    <motion.article
+    <m.article
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -32,6 +32,8 @@ export function DoctorCard({ doctor, className }: { doctor: Doctor; className?: 
         {doctor.image ? (
           <img
             src={doctor.image}
+            srcSet={srcSet(doctor.image)}
+            sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
             alt={doctor.name}
             loading="lazy"
             decoding="async"
@@ -68,6 +70,6 @@ export function DoctorCard({ doctor, className }: { doctor: Doctor; className?: 
           </span>
         </button>
       </div>
-    </motion.article>
+    </m.article>
   )
 }

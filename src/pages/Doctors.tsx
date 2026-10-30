@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { Search, SearchX } from 'lucide-react'
 import { doctors, specialities } from '@/data/site'
 import { PageHero } from '@/components/ui/PageHero'
@@ -64,11 +64,11 @@ export default function Doctors() {
           <p className="mb-8 text-sm text-muted" aria-live="polite">
             Showing <span className="font-semibold text-ink">{results.length}</span> of {doctors.length} doctors
           </p>
-          <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <m.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <AnimatePresence mode="popLayout">
               {results.map((d) => <DoctorCard key={d.id} doctor={d} />)}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
           {results.length === 0 && (
             <div className="flex flex-col items-center py-20 text-center">
               <span className="grid size-16 place-items-center rounded-full bg-canvas text-muted">

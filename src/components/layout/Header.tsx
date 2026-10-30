@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ArrowUpRight, CalendarCheck, Clock, Mail, MapPin, Menu, Phone, Siren, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { hospital, navLinks } from '@/data/site'
@@ -80,7 +80,7 @@ export function Header() {
                 {({ isActive }) => (
                   <>
                     {isActive && (
-                      <motion.span
+                      <m.span
                         layoutId="nav-pill"
                         className="absolute inset-0 rounded-full bg-white shadow-soft"
                         transition={{ type: 'spring', damping: 30, stiffness: 350 }}
@@ -129,7 +129,7 @@ export function Header() {
       {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -139,7 +139,7 @@ export function Header() {
             <div className="container-x flex min-h-full flex-col py-6">
               <nav className="flex flex-col" aria-label="Mobile">
                 {navLinks.map((link, i) => (
-                  <motion.div
+                  <m.div
                     key={link.path}
                     initial={{ opacity: 0, x: 24 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -152,7 +152,7 @@ export function Header() {
                       {link.name}
                       <ArrowUpRight className="size-5 text-brand-500" />
                     </Link>
-                  </motion.div>
+                  </m.div>
                 ))}
               </nav>
               <div className="mt-auto space-y-3 pt-10 pb-8">
@@ -170,7 +170,7 @@ export function Header() {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

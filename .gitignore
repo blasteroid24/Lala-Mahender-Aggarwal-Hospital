@@ -37,3 +37,8 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
+
+.agents/
+
+# Generated image variants (scripts/resize-images.mjs)
+public/img/r/

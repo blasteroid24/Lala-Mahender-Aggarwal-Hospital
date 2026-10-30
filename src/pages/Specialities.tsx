@@ -3,6 +3,7 @@ import { doctors, specialities } from '@/data/site'
 import { PageHero } from '@/components/ui/PageHero'
 import { Reveal } from '@/components/ui/Reveal'
 import { useBooking } from '@/components/booking/BookingProvider'
+import { srcSet } from '@/lib/utils'
 
 export default function Specialities() {
   const { openBooking } = useBooking()
@@ -45,7 +46,7 @@ export default function Specialities() {
                       <div className="flex -space-x-2">
                         {team.map((d) =>
                           d.image ? (
-                            <img key={d.id} src={d.image} alt={d.name} title={d.name} className="size-9 rounded-full border-2 border-white object-cover object-top" />
+                            <img key={d.id} src={d.image} srcSet={srcSet(d.image)} sizes="36px" alt={d.name} title={d.name} className="size-9 rounded-full border-2 border-white object-cover object-top" />
                           ) : (
                             <span key={d.id} title={d.name} className="grid size-9 place-items-center rounded-full border-2 border-white bg-brand-100 text-xs font-bold text-brand-700">
                               {d.name.replace('Dr. ', '')[0]}

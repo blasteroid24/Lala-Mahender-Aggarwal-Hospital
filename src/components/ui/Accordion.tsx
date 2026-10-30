@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { Plus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -36,7 +36,7 @@ export function Accordion({ items, defaultOpen = 0 }: { items: Item[]; defaultOp
             </button>
             <AnimatePresence initial={false}>
               {isOpen && (
-                <motion.div
+                <m.div
                   id={`${baseId}-p-${i}`}
                   role="region"
                   aria-labelledby={`${baseId}-h-${i}`}
@@ -47,7 +47,7 @@ export function Accordion({ items, defaultOpen = 0 }: { items: Item[]; defaultOp
                   className="overflow-hidden"
                 >
                   <p className="max-w-2xl pr-12 pb-6 text-ink-soft">{item.a}</p>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { ChevronRight } from 'lucide-react'
 
 type PageHeroProps = {
@@ -14,8 +14,8 @@ export function PageHero({ crumb, title, description, children }: PageHeroProps)
   return (
     <section className="relative overflow-hidden bg-canvas">
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_0%,black,transparent)]" />
-      <div className="pointer-events-none absolute -top-32 left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-brand-200/40 blur-3xl" />
-      <motion.div
+      <div className="pointer-events-none absolute -top-32 left-1/2 size-[52rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(166_221_231/0.4),transparent)]" />
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -29,7 +29,7 @@ export function PageHero({ crumb, title, description, children }: PageHeroProps)
         <h1 className="mx-auto max-w-4xl text-4xl leading-[1.05] font-extrabold tracking-[-0.03em] sm:text-5xl md:text-7xl">{title}</h1>
         {description && <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-soft">{description}</p>}
         {children}
-      </motion.div>
+      </m.div>
     </section>
   )
 }

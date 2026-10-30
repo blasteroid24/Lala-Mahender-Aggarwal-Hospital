@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { m, useScroll, useTransform } from 'motion/react'
 import { ArrowRight, Award, HandHeart, ShieldCheck } from 'lucide-react'
 import { hospital } from '@/data/site'
 import { Reveal } from '@/components/ui/Reveal'
+import { srcSet } from '@/lib/utils'
 
 const points = [
   { icon: ShieldCheck, title: 'Safety first', text: 'Infection-control and patient-safety protocols audited every quarter.' },
@@ -20,9 +21,11 @@ export function LegacyBanner() {
     <section className="section bg-white">
       <div className="container-x">
         <div ref={ref} className="relative overflow-hidden rounded-[36px] bg-brand-800 md:rounded-[48px]">
-          <motion.img
+          <m.img
             style={{ y }}
             src="/img/banner.webp"
+            srcSet={srcSet('/img/banner.webp')}
+            sizes="(min-width: 1280px) 1220px, 100vw"
             alt="A senior doctor speaking warmly with a mother and daughter"
             loading="lazy"
             className="absolute inset-x-0 -top-[8%] h-[116%] w-full object-cover object-[70%_center]"

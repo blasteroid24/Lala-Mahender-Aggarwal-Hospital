@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { doctors, specialities } from '@/data/site'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -37,18 +37,18 @@ export function DoctorsSection() {
               )}
             >
               {filter === s.slug && (
-                <motion.span layoutId="doc-filter" className="absolute inset-0 rounded-full bg-ink" transition={{ type: 'spring', damping: 30, stiffness: 350 }} />
+                <m.span layoutId="doc-filter" className="absolute inset-0 rounded-full bg-ink" transition={{ type: 'spring', damping: 30, stiffness: 350 }} />
               )}
               <span className="relative">{s.name.split(' &')[0]}</span>
             </button>
           ))}
         </div>
 
-        <motion.div layout className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+        <m.div layout className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {list.map((d) => <DoctorCard key={d.id} doctor={d} className="w-[78%] shrink-0 snap-start sm:w-auto" />)}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

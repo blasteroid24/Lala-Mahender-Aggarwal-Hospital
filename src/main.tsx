@@ -1,13 +1,24 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root')!
+const app = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Pages are pre-rendered at build time. Hydrate only when the HTML was rendered
+// for this exact URL; otherwise (e.g. SPA fallback, ?query) render from scratch.
+const normalize = (p: string) => p.replace(/\/+$/, '') || '/'
+if (root.dataset.route && normalize(root.dataset.route) === normalize(location.pathname) && !location.search) {
+  hydrateRoot(root, app)
+} else {
+  root.textContent = ''
+  createRoot(root).render(app)
+}

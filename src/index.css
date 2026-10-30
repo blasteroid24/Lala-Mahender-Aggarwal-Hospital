@@ -1,13 +1,16 @@
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', 'Geist Variable', ui-sans-serif, sans-serif;
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans Variable', 'Jakarta Fallback', ui-sans-serif, sans-serif;
+  --font-serif: 'Instrument Serif', 'Instrument Fallback', ui-serif, Georgia, serif;
 
   /* Brand — change these to re-skin the whole template */
   --color-brand-50: #ecf8fa;
@@ -44,6 +47,13 @@
   --animate-marquee: marquee var(--marquee-duration, 50s) linear infinite;
   --animate-pulse-ring: pulse-ring 2.2s var(--ease-out-expo) infinite;
   --animate-float: float 6s ease-in-out infinite;
+  /* Entrance animations for above-the-fold content: pure CSS so they run
+     before JS loads. `rise-in` never hides its element (keeps LCP fast). */
+  --animate-fade-up: fade-up 0.8s var(--ease-out-expo) both;
+  --animate-rise-in: rise-in 0.8s var(--ease-out-expo) both;
+  --animate-pop-in: pop-in 1s var(--ease-out-expo) both;
+  --animate-slide-in-left: slide-in-left 0.8s var(--ease-out-expo) both;
+  --animate-slide-in-right: slide-in-right 0.8s var(--ease-out-expo) both;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -53,10 +63,49 @@
     0% { transform: scale(0.8); opacity: 0.7; }
     100% { transform: scale(2.2); opacity: 0; }
   }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(28px); }
+  }
+  @keyframes rise-in {
+    from { transform: translateY(28px); }
+  }
+  @keyframes pop-in {
+    from { transform: translateY(30px) scale(0.94); }
+  }
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-30px); }
+  }
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(30px); }
+  }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+}
+
+/* Metric-matched local fallbacks so text doesn't reflow (layout shift) when
+   the web fonts swap in. Re-measure size-adjust if you change fonts. */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  size-adjust: 102%;
+}
+@font-face {
+  font-family: 'Jakarta Fallback';
+  src: local('Arial');
+  size-adjust: 103%;
+}
+@font-face {
+  font-family: 'Instrument Fallback';
+  src: local('Georgia');
+  size-adjust: 79%;
+}
+@font-face {
+  font-family: 'Instrument Fallback';
+  font-style: italic;
+  src: local('Georgia Italic'), local('Georgia-Italic');
+  size-adjust: 79%;
 }
 
 @layer base {

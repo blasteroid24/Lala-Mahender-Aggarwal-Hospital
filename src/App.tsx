@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { MotionConfig } from 'motion/react'
+import { LazyMotion, MotionConfig } from 'motion/react'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MobileDock } from '@/components/layout/MobileDock'
@@ -14,31 +14,34 @@ const Doctors = lazy(() => import('@/pages/Doctors'))
 const Specialities = lazy(() => import('@/pages/Specialities'))
 const Contact = lazy(() => import('@/pages/Contact'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const motionFeatures = () => import('@/lib/motion-features').then((mod) => mod.default)
 
 function App() {
   return (
-    <MotionConfig reducedMotion="user">
-      <BookingProvider>
-        <ScrollManager />
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <Suspense fallback={<div className="min-h-[70vh]" />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/doctors" element={<Doctors />} />
-                <Route path="/specialities" element={<Specialities />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-          <MobileDock />
-        </div>
-      </BookingProvider>
-    </MotionConfig>
+    <LazyMotion features={motionFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <BookingProvider>
+          <ScrollManager />
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <Suspense fallback={<div className="min-h-[70vh]" />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/doctors" element={<Doctors />} />
+                  <Route path="/specialities" element={<Specialities />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
+            <MobileDock />
+          </div>
+        </BookingProvider>
+      </MotionConfig>
+    </LazyMotion>
   )
 }
 
