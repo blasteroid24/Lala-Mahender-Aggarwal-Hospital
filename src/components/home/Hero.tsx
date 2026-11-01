@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { m, useReducedMotion } from 'motion/react'
-import { ArrowRight, CalendarCheck, Search, Siren, Star, Stethoscope } from 'lucide-react'
+import { ArrowRight, CalendarCheck, Clock, Phone, Search, Siren, Star, Stethoscope } from 'lucide-react'
 import { doctors, hospital, quickServices, specialities } from '@/data/site'
 import { useBooking } from '@/components/booking/BookingProvider'
 import { srcSet } from '@/lib/utils'
+import { features } from '@/config/features'
 
 // Staggered CSS entrance delays (ms) for the hero copy
 const stagger = (i: number) => ({ animationDelay: `${i * 90}ms` })
@@ -41,7 +42,19 @@ export function Hero() {
 
   function onSearch(e: FormEvent) {
     e.preventDefault()
-    navigate(query.trim() ? `/doctors?q=${encodeURIComponent(query.trim())}` : '/doctors')
+    const q = query.trim()
+    if (features.showDoctors) {
+      navigate(q ? `/doctors?q=${encodeURIComponent(q)}` : '/doctors')
+      return
+    }
+    // Without the doctor directory, jump to the best-matching speciality
+    const needle = q.toLowerCase()
+    const match = needle
+      ? specialities.find((s) =>
+          [s.name, s.short, s.description, ...s.highlights].some((t) => t.toLowerCase().includes(needle)),
+        )
+      : undefined
+    navigate(match ? `/specialities#${match.slug}` : '/specialities')
   }
 
   const featured = doctors[0]
@@ -88,17 +101,17 @@ export function Hero() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search doctors, specialities, conditions…"
-              aria-label="Search doctors or specialities"
+              placeholder={features.showDoctors ? 'Search doctors, specialities, conditions…' : 'Search specialities, conditions, treatments…'}
+              aria-label={features.showDoctors ? 'Search doctors or specialities' : 'Search specialities or conditions'}
               list="hero-suggestions"
               className="min-w-0 flex-1 bg-transparent py-2 text-[15px] outline-none placeholder:text-muted"
             />
             <datalist id="hero-suggestions">
               {specialities.map((s) => <option key={s.slug} value={s.name} />)}
-              {doctors.map((d) => <option key={d.id} value={d.name} />)}
+              {features.showDoctors && doctors.map((d) => <option key={d.id} value={d.name} />)}
             </datalist>
             <button type="submit" className="btn btn-dark px-4 sm:px-6">
-              <span className="hidden sm:inline">Find a doctor</span>
+              <span className="hidden sm:inline">{features.showDoctors ? 'Find a doctor' : 'Find care'}</span>
               <ArrowRight className="size-4" />
             </button>
           </form>
@@ -124,9 +137,15 @@ export function Hero() {
           {/* Social proof */}
           <div style={stagger(5)} className="mt-10 flex animate-fade-up items-center gap-5">
             <div className="flex -space-x-3">
-              {doctors.filter((d) => d.image).slice(0, 4).map((d) => (
-                <img key={d.id} src={d.image} srcSet={srcSet(d.image!)} sizes="44px" alt="" width={44} height={44} className="size-11 rounded-full border-[3px] border-canvas object-cover object-top" />
-              ))}
+              {features.showDoctors
+                ? doctors.filter((d) => d.image).slice(0, 4).map((d) => (
+                    <img key={d.id} src={d.image} srcSet={srcSet(d.image!)} sizes="44px" alt="" width={44} height={44} className="size-11 rounded-full border-[3px] border-canvas object-cover object-top" />
+                  ))
+                : specialities.slice(0, 3).map((s) => (
+                    <span key={s.slug} className="grid size-11 place-items-center rounded-full border-[3px] border-canvas bg-brand-50 text-brand-600">
+                      <s.icon className="size-4.5" />
+                    </span>
+                  ))}
               <span className="grid size-11 place-items-center rounded-full border-[3px] border-canvas bg-brand-600 text-xs font-bold text-white">
                 250+
               </span>
@@ -162,33 +181,60 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Floating: next slot */}
+          {/* Floating: next slot (doctor) — or OPD hours while doctors come from HMIS */}
           <div
             style={{ animationDelay: '500ms' }}
             className="absolute top-8 animate-slide-in-left -left-2 hidden w-72 sm:block lg:-left-10"
           >
-            <div className="animate-float rounded-3xl border border-white/60 bg-white/85 p-4 shadow-lift backdrop-blur-xl">
-              <div className="flex items-center gap-3">
-                <img src={featured.image} srcSet={srcSet(featured.image!)} sizes="48px" alt="" width={48} height={48} className="size-12 rounded-2xl object-cover object-top" />
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{featured.name}</p>
-                  <p className="truncate text-xs text-muted">{featured.role}</p>
+            {features.showDoctors && features.showBooking ? (
+              <div className="animate-float rounded-3xl border border-white/60 bg-white/85 p-4 shadow-lift backdrop-blur-xl">
+                <div className="flex items-center gap-3">
+                  <img src={featured.image} srcSet={srcSet(featured.image!)} sizes="48px" alt="" width={48} height={48} className="size-12 rounded-2xl object-cover object-top" />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold">{featured.name}</p>
+                    <p className="truncate text-xs text-muted">{featured.role}</p>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-between rounded-2xl bg-brand-50 px-3 py-2">
+                  <span className="text-xs text-brand-800">
+                    <span className="block text-[10px] font-semibold uppercase tracking-wider text-brand-600">Next available</span>
+                    Today · 4:30 PM
+                  </span>
+                  <button
+                    onClick={() => openBooking({ doctorId: featured.id })}
+                    className="grid size-9 place-items-center rounded-full bg-brand-600 text-white transition hover:scale-110"
+                    aria-label={`Book with ${featured.name}`}
+                  >
+                    <CalendarCheck className="size-4" />
+                  </button>
                 </div>
               </div>
-              <div className="mt-3 flex items-center justify-between rounded-2xl bg-brand-50 px-3 py-2">
-                <span className="text-xs text-brand-800">
-                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-brand-600">Next available</span>
-                  Today · 4:30 PM
-                </span>
-                <button
-                  onClick={() => openBooking({ doctorId: featured.id })}
-                  className="grid size-9 place-items-center rounded-full bg-brand-600 text-white transition hover:scale-110"
-                  aria-label={`Book with ${featured.name}`}
-                >
-                  <CalendarCheck className="size-4" />
-                </button>
+            ) : (
+              <div className="animate-float rounded-3xl border border-white/60 bg-white/85 p-4 shadow-lift backdrop-blur-xl">
+                <div className="flex items-center gap-3">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">
+                    <Clock className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold">OPD open today</p>
+                    <p className="truncate text-xs text-muted">{hospital.hours.opd}</p>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-between rounded-2xl bg-brand-50 px-3 py-2">
+                  <span className="text-xs text-brand-800">
+                    <span className="block text-[10px] font-semibold uppercase tracking-wider text-brand-600">Front desk</span>
+                    {hospital.phone}
+                  </span>
+                  <a
+                    href={`tel:${hospital.phone}`}
+                    className="grid size-9 place-items-center rounded-full bg-brand-600 text-white transition hover:scale-110"
+                    aria-label={`Call ${hospital.phone}`}
+                  >
+                    <Phone className="size-4" />
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Floating: emergency */}

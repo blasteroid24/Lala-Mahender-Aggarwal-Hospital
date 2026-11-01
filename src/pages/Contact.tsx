@@ -4,6 +4,7 @@ import { hospital } from '@/data/site'
 import { PageHero } from '@/components/ui/PageHero'
 import { Reveal } from '@/components/ui/Reveal'
 import { BookingForm } from '@/components/booking/BookingForm'
+import { features } from '@/config/features'
 
 const channels = [
   { icon: Siren, label: '24/7 Emergency', value: hospital.emergencyPhone, href: `tel:${hospital.emergencyPhone}`, tone: 'alert' },
@@ -50,11 +51,39 @@ export default function Contact() {
 
         <div className="container-x mt-16 grid gap-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
-            <div className="rounded-[32px] border border-line bg-white p-6 shadow-lift md:p-10">
-              <h2 className="text-3xl">Request an appointment</h2>
-              <p className="mt-2 mb-8 text-muted">We'll call you back to confirm your slot.</p>
-              <BookingForm />
-            </div>
+            {features.showBooking ? (
+              <div className="rounded-[32px] border border-line bg-white p-6 shadow-lift md:p-10">
+                <h2 className="text-3xl">Request an appointment</h2>
+                <p className="mt-2 mb-8 text-muted">We'll call you back to confirm your slot.</p>
+                <BookingForm />
+              </div>
+            ) : (
+              <div className="flex h-full flex-col rounded-[32px] border border-line bg-white p-6 shadow-lift md:p-10">
+                <h2 className="text-3xl">Talk to our care team</h2>
+                <p className="mt-2 text-muted">
+                  Call or message us and we'll guide you to the right specialist — for appointments, reports,
+                  insurance or any question at all.
+                </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  <a href={`tel:${hospital.phone}`} className="btn btn-primary py-4 text-base">
+                    <Phone className="size-5" /> Call {hospital.phone}
+                  </a>
+                  <a href={`https://wa.me/${hospital.whatsapp}`} target="_blank" rel="noreferrer" className="btn btn-ghost py-4 text-base">
+                    <FaWhatsapp className="size-5" /> WhatsApp us
+                  </a>
+                </div>
+                <dl className="mt-auto grid gap-4 border-t border-line pt-8 text-sm sm:grid-cols-2">
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-brand-600">OPD</dt>
+                    <dd className="mt-1 text-ink-soft">{hospital.hours.opd}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-alert">Emergency</dt>
+                    <dd className="mt-1 text-ink-soft">{hospital.hours.emergency}</dd>
+                  </div>
+                </dl>
+              </div>
+            )}
           </Reveal>
           <Reveal delay={0.1} className="flex flex-col gap-4 lg:col-span-5">
             <div className="relative min-h-[320px] flex-1 overflow-hidden rounded-[32px] border border-line bg-canvas">

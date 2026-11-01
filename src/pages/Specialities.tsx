@@ -1,5 +1,7 @@
 import { CalendarCheck, Check } from 'lucide-react'
-import { doctors, specialities } from '@/data/site'
+import { FaWhatsapp } from 'react-icons/fa6'
+import { doctors, hospital, specialities } from '@/data/site'
+import { features } from '@/config/features'
 import { PageHero } from '@/components/ui/PageHero'
 import { Reveal } from '@/components/ui/Reveal'
 import { useBooking } from '@/components/booking/BookingProvider'
@@ -31,7 +33,7 @@ export default function Specialities() {
       <section className="section bg-white">
         <div className="container-x grid gap-5 md:grid-cols-2">
           {specialities.map((s, i) => {
-            const team = doctors.filter((d) => d.speciality === s.slug)
+            const team = features.showDoctors ? doctors.filter((d) => d.speciality === s.slug) : []
             return (
               <Reveal key={s.slug} delay={(i % 2) * 0.06}>
                 <article
@@ -65,12 +67,23 @@ export default function Specialities() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    onClick={() => openBooking({ speciality: s.slug })}
-                    className="btn mt-8 self-start border border-line bg-white text-ink hover:border-brand-600 hover:bg-brand-600 hover:text-white"
-                  >
-                    <CalendarCheck className="size-4" /> Book a consultation
-                  </button>
+                  {features.showBooking ? (
+                    <button
+                      onClick={() => openBooking({ speciality: s.slug })}
+                      className="btn mt-8 self-start border border-line bg-white text-ink hover:border-brand-600 hover:bg-brand-600 hover:text-white"
+                    >
+                      <CalendarCheck className="size-4" /> Book a consultation
+                    </button>
+                  ) : (
+                    <a
+                      href={`https://wa.me/${hospital.whatsapp}?text=${encodeURIComponent(`Hello, I'd like to know more about ${s.name}.`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn mt-8 self-start border border-line bg-white text-ink hover:border-brand-600 hover:bg-brand-600 hover:text-white"
+                    >
+                      <FaWhatsapp className="size-4" /> Ask about {s.name.split(' &')[0]}
+                    </a>
+                  )}
                 </article>
               </Reveal>
             )

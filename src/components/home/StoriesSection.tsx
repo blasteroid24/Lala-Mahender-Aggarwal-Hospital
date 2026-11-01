@@ -4,6 +4,7 @@ import { ChevronDown, Users } from 'lucide-react'
 import { caseStories } from '@/data/site'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { cn, srcSet } from '@/lib/utils'
+import { features } from '@/config/features'
 
 export function StoriesSection() {
   const [active, setActive] = useState(0)
@@ -106,10 +107,14 @@ export function StoriesSection() {
                     )}
                   </AnimatePresence>
                   <div className="mt-6 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="flex items-start gap-2 text-sm text-muted">
-                      <Users className="mt-0.5 size-4 shrink-0 text-brand-500" />
-                      <span><span className="font-medium text-ink">Care team:</span> {story.doctors}</span>
-                    </p>
+                    {features.showDoctors ? (
+                      <p className="flex items-start gap-2 text-sm text-muted">
+                        <Users className="mt-0.5 size-4 shrink-0 text-brand-500" />
+                        <span><span className="font-medium text-ink">Care team:</span> {story.doctors}</span>
+                      </p>
+                    ) : (
+                      <span />
+                    )}
                     <button
                       onClick={() => setExpanded((v) => !v)}
                       className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-700"

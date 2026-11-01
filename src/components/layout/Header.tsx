@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, m } from 'motion/react'
 import { ArrowUpRight, CalendarCheck, Clock, Mail, MapPin, Menu, Phone, Siren, X } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa6'
 import { cn } from '@/lib/utils'
 import { hospital, navLinks } from '@/data/site'
 import { Logo } from '@/components/ui/Logo'
 import { useBooking } from '@/components/booking/BookingProvider'
+import { features } from '@/config/features'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -110,10 +112,17 @@ export function Header() {
                 <span className="text-sm font-semibold">{hospital.phone}</span>
               </span>
             </a>
-            <button onClick={() => openBooking()} className="btn btn-primary hidden sm:inline-flex">
-              <CalendarCheck className="size-4" />
-              Book Appointment
-            </button>
+            {features.showBooking ? (
+              <button onClick={() => openBooking()} className="btn btn-primary hidden sm:inline-flex">
+                <CalendarCheck className="size-4" />
+                Book Appointment
+              </button>
+            ) : (
+              <a href={`https://wa.me/${hospital.whatsapp}`} target="_blank" rel="noreferrer" className="btn btn-primary hidden sm:inline-flex">
+                <FaWhatsapp className="size-4" />
+                WhatsApp us
+              </a>
+            )}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="grid size-11 place-items-center rounded-full bg-ink text-white lg:hidden"
@@ -165,9 +174,15 @@ export function Header() {
                     <span className="font-heading text-lg font-bold">{hospital.emergencyPhone}</span>
                   </span>
                 </a>
-                <button onClick={() => { setMenuOpen(false); openBooking() }} className="btn btn-primary w-full py-4 text-base">
-                  <CalendarCheck className="size-5" /> Book Appointment
-                </button>
+                {features.showBooking ? (
+                  <button onClick={() => { setMenuOpen(false); openBooking() }} className="btn btn-primary w-full py-4 text-base">
+                    <CalendarCheck className="size-5" /> Book Appointment
+                  </button>
+                ) : (
+                  <a href={`tel:${hospital.phone}`} className="btn btn-primary w-full py-4 text-base">
+                    <Phone className="size-5" /> Call {hospital.phone}
+                  </a>
+                )}
               </div>
             </div>
           </m.div>

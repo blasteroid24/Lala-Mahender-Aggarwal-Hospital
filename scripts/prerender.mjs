@@ -5,7 +5,8 @@
 import { readFile, writeFile, mkdir, readdir, rm } from 'node:fs/promises'
 import path from 'node:path'
 
-const ROUTES = ['/', '/about', '/doctors', '/specialities', '/contact']
+// '/doctors' is omitted while features.showDoctors is false (src/config/features.ts)
+const ROUTES = ['/', '/about', '/specialities', '/contact', '/template-2', '/template-3', '/template-4']
 const DIST = path.resolve('dist')
 const SSR = path.resolve('dist-ssr')
 

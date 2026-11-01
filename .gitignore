@@ -42,3 +42,4 @@ coverage/
 
 # Generated image variants (scripts/resize-images.mjs)
 public/img/r/
+.playwright-mcp/

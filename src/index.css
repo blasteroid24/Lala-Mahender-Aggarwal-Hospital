@@ -2,6 +2,12 @@
 @import "@fontsource-variable/plus-jakarta-sans";
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource/instrument-serif/400-italic.css";
+/* Fonts for the alternate landing templates (/template-2 … /template-4).
+   Browsers only download a font file when a page actually uses it. */
+@import "@fontsource-variable/fraunces/wght.css";
+@import "@fontsource-variable/fraunces/wght-italic.css";
+@import "@fontsource-variable/montserrat";
+@import "@fontsource-variable/dm-sans";
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -11,6 +17,9 @@
   --font-sans: 'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Plus Jakarta Sans Variable', 'Jakarta Fallback', ui-sans-serif, sans-serif;
   --font-serif: 'Instrument Serif', 'Instrument Fallback', ui-serif, Georgia, serif;
+  --font-fraunces: 'Fraunces Variable', ui-serif, Georgia, serif;      /* Template 2 */
+  --font-montserrat: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif; /* Template 3 */
+  --font-dm: 'DM Sans Variable', ui-sans-serif, system-ui, sans-serif; /* Template 4 */
 
   /* Brand — change these to re-skin the whole template */
   --color-brand-50: #ecf8fa;
@@ -34,6 +43,59 @@
   --color-muted: #6b7f8c;
   --color-canvas: #f5f8fa;
   --color-line: #e3eaef;
+
+  /* ── Template 2 · "Visionary" — light, forest-emerald green ── */
+  --color-verdant-50: #f0f7f3;
+  --color-verdant-100: #dcede3;
+  --color-verdant-200: #bcdcc9;
+  --color-verdant-300: #8fc4a8;
+  --color-verdant-400: #5fa684;
+  --color-verdant-500: #3b8a68;
+  --color-verdant-600: #2a7056;
+  --color-verdant-700: #1f5c47;
+  --color-verdant-800: #1b4a3a;
+  --color-verdant-900: #173d31;
+  --color-verdant-950: #0b231b;
+  --color-ivory: #fafbf8;
+  --color-sage: #eef5f0;
+  --color-sand: #d9c9a8;
+  --color-sand-soft: #f4eee2;
+
+  /* ── Template 3 · deep navy + coral-red ── */
+  --color-navy-50: #f4f6fa;
+  --color-navy-100: #e8eef8;
+  --color-navy-200: #c9d5ec;
+  --color-navy-300: #9db1d8;
+  --color-navy-400: #5f7cb8;
+  --color-navy-500: #34549a;
+  --color-navy-600: #213f82;
+  --color-navy-700: #14306b;
+  --color-navy-800: #102756;
+  --color-navy-900: #1a2238;
+  --color-navy-950: #0c1530;
+  --color-coral-50: #fdf1ee;
+  --color-coral-100: #fbe0d9;
+  --color-coral-400: #ec7a63;
+  --color-coral-500: #e4573d;
+  --color-coral-600: #c9442c;
+  --color-coral-700: #a53622;
+
+  /* ── Template 4 · calm teal-green + soft peach ── */
+  --color-lagoon-50: #f6faf9;
+  --color-lagoon-100: #e3f2f1;
+  --color-lagoon-200: #c3e3e1;
+  --color-lagoon-300: #8ccbc8;
+  --color-lagoon-400: #4fa9a6;
+  --color-lagoon-500: #1f8f8d;
+  --color-lagoon-600: #0e7c7b;
+  --color-lagoon-700: #0b6463;
+  --color-lagoon-800: #0c4f4e;
+  --color-lagoon-900: #17302f;
+  --color-peach-50: #fff6f1;
+  --color-peach-100: #fde8dd;
+  --color-peach-200: #f9cfba;
+  --color-peach-300: #f4a988;
+  --color-peach-500: #e9875e;
 
   --color-alert: #e5384f;
   --color-alert-soft: #fdecef;

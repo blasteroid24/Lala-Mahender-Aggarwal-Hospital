@@ -2,6 +2,7 @@ import { CalendarCheck, Phone, Siren } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa6'
 import { hospital } from '@/data/site'
 import { useBooking } from '@/components/booking/BookingProvider'
+import { features } from '@/config/features'
 
 /** Thumb-reachable action bar for phones — the three things patients need most. */
 export function MobileDock() {
@@ -16,9 +17,15 @@ export function MobileDock() {
         >
           <Siren className="size-5" />
         </a>
-        <button onClick={() => openBooking()} className="btn btn-primary h-12 flex-1">
-          <CalendarCheck className="size-4" /> Book Appointment
-        </button>
+        {features.showBooking ? (
+          <button onClick={() => openBooking()} className="btn btn-primary h-12 flex-1">
+            <CalendarCheck className="size-4" /> Book Appointment
+          </button>
+        ) : (
+          <a href={`tel:${hospital.phone}`} className="btn btn-primary h-12 flex-1">
+            <Phone className="size-4" /> Call us
+          </a>
+        )}
         <a
           href={`https://wa.me/${hospital.whatsapp}`}
           target="_blank"
@@ -28,13 +35,13 @@ export function MobileDock() {
         >
           <FaWhatsapp className="size-5" />
         </a>
-        <a
+        {features.showBooking && <a
           href={`tel:${hospital.phone}`}
           aria-label="Call hospital"
           className="hidden size-12 shrink-0 place-items-center rounded-full bg-canvas text-ink-soft min-[400px]:grid"
         >
           <Phone className="size-5" />
-        </a>
+        </a>}
       </div>
     </div>
   )

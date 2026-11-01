@@ -23,6 +23,7 @@ import {
   Stethoscope,
   Video,
 } from 'lucide-react'
+import { features } from '@/config/features'
 
 export const hospital = {
   name: 'Lala Mahender Aggarwal Hospital',
@@ -50,7 +51,7 @@ export const navLinks = [
   { name: 'Find a Doctor', path: '/doctors' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
-]
+].filter((l) => features.showDoctors || l.path !== '/doctors')
 
 export type Speciality = {
   slug: string
@@ -396,16 +397,16 @@ export const packages = [
 ]
 
 export const faqs = [
-  { q: 'How do I book an appointment?', a: 'Use the “Book Appointment” button anywhere on this site, call our front desk, or message us on WhatsApp. You will receive a confirmation with your slot and doctor details.' },
+  { q: 'How do I get an appointment?', a: 'Call our front desk or message us on WhatsApp — our team will find a suitable time with the right specialist and confirm your visit.' },
   { q: 'Which specialities are available at LMA Hospital?', a: 'We offer care across cardiology, neurosciences, oncology, orthopaedics, paediatrics, women’s health, nephrology, gastroenterology, ENT, ophthalmology and more — supported by 24/7 emergency and critical care.' },
-  { q: 'Can I consult a doctor from home?', a: 'Yes. Secure video consultations are available for follow-ups and non-emergency concerns. Choose “Video consult” when booking.' },
+  { q: 'Can I consult a doctor from home?', a: 'Yes. Secure video consultations are available for follow-ups and non-emergency concerns. Ask our front desk to arrange one.' },
   { q: 'Are lab and imaging services available 24/7?', a: 'Our laboratory, CT and emergency imaging operate round the clock. MRI and other planned scans are scheduled with same-day reporting wherever possible.' },
   { q: 'Do you accept health insurance and cashless claims?', a: 'We work with most major insurers and TPAs for cashless treatment. Our insurance desk will help you with pre-authorisation and paperwork.' },
   { q: 'Is the pharmacy open all day?', a: 'Yes, our in-house pharmacy is fully stocked and open 24/7 so prescribed medicines are always available.' },
 ]
 
 export const quickServices = [
-  { icon: Activity, label: 'Health Check-ups', href: '/#packages' },
+  { icon: Activity, label: 'Health Check-ups', href: features.showBooking ? '/#packages' : '/contact' },
   { icon: FlaskConical, label: 'Lab Reports', href: '/contact' },
   { icon: Video, label: 'Video Consult', href: '/contact' },
 ]

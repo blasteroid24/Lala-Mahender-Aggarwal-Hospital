@@ -9,6 +9,7 @@ import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { PackagesSection } from '@/components/home/PackagesSection'
 import { FaqSection } from '@/components/home/FaqSection'
 import { BookingSection } from '@/components/home/BookingSection'
+import { features } from '@/config/features'
 
 export default function Home() {
   return (
@@ -17,13 +18,13 @@ export default function Home() {
       <StatsBand />
       <SpecialitiesSection />
       <TechnologySection />
-      <DoctorsSection />
+      {features.showDoctors && <DoctorsSection />}
       <LegacyBanner />
       <StoriesSection />
       <TestimonialsSection />
-      <PackagesSection />
+      {features.showBooking && <PackagesSection />}
       <FaqSection />
-      <BookingSection />
+      {features.showBooking && <BookingSection />}
     </>
   )
 }

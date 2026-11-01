@@ -22,6 +22,27 @@ npm run build    # production build in /dist
 > All names, figures, prices, ratings and testimonials in `site.ts` are placeholders — replace them with
 > verified information from the client before going live.
 
+## Feature switches & design templates
+
+`src/config/features.ts` holds site-wide switches:
+
+| Flag | Default | Effect |
+| ---- | ------- | ------ |
+| `showDoctors` | `false` | Doctors section, "Find a Doctor" link and `/doctors` page (will be fed by the HMIS integration). Also remove/add `/doctors` in `scripts/prerender.mjs`. |
+| `showBooking` | `false` | Booking forms/buttons and health-package prices. When off, CTAs become Call / WhatsApp. |
+| `showTemplateSwitcher` | `true` | The "Template 1–4" design-preview bar. Set `VITE_SHOW_TEMPLATE_SWITCHER=false` at launch. |
+
+Alternate landing-page designs (each has its own header, footer and colour tokens in `src/index.css`):
+
+| Route | Template | Look |
+| ----- | -------- | ---- |
+| `/` | 1 · Classic Care | Teal & mint (the main site) |
+| `/template-2` | 2 · Visionary | Full-screen photo hero + quick-actions bar; white & sage with forest green, Fraunces headings |
+| `/template-3` | 3 · Assurance | Banner slider hero + "How can we help" search, tabbed specialities; navy & coral-red, Montserrat |
+| `/template-4` | 4 · Every Stage of Life | Split colour/photo hero, care by life stage; calm teal-green & soft peach, DM Sans |
+
+Template code lives in `src/routes/template-N/`.
+
 ## Pages
 
 | Route           | Page                                                       |
